@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nusalokal - High Fidelity Mockup</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #fd0404;
+            --secondary: #7C3AED;
+            --background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-main: #F8FAFC;
+            --text-dim: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Device Frame Sim */
+        .device-frame {
+            width: 375px;
+            height: 812px;
+            background: #1d1c1c;
+            border-radius: 40px;
+            border: 8px solid #334155;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+        }
+
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            padding: 24px;
+            padding-bottom: 90px;
+            overflow-y: auto;
+        }
+
+        /* Scrollbar Hide */
+        .screen-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .profile-badges {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--glass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+
+        /* Greeting */
+        .greeting-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .greeting-section p {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin: 24px 0;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-container input {
+            background: none;
+            border: none;
+            color: white;
+            flex: 1;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-container i {
+            color: var(--text-dim);
+        }
+
+        /* Main Categories */
+        .section-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .featured-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            margin-bottom: 32px;
+            padding-bottom: 8px;
+        }
+
+        .featured-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .glass-card {
+            min-width: 140px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .card-sub {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* Bidang Favorit List */
+        .fav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fav-item {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .fav-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(79, 70, 229, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .fav-info {
+            flex: 1;
+        }
+
+        .fav-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 20px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .screen-content>* {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Header -->
+            <header>
+                <div class="logo-section">
+                    <div class="logo-icon">M</div>
+                    <span style="font-weight: 700; font-size: 18px;">Mega Kreatif</span>
+                </div>
+                <div class="profile-badges">
+                    <div class="icon-btn" id="notif-btn" onclick="toggleNotifCenter()">
+                        <i class="fas fa-bell"></i>
+                        <div class="notif-badge" id="notif-badge"></div>
+                    </div>
+                    <div class="icon-btn"><i class="fas fa-user"></i></div>
+                </div>
+            </header>
+
+            <!-- Notification Center (Hidden by Default) -->
+            <div id="notif-center" class="notif-center" style="display: none;">
+                <div class="notif-header">
+                    <h3>Notifikasi</h3>
+                    <span onclick="toggleNotifCenter()" style="cursor: pointer;"><i class="fas fa-times"></i></span>
+                </div>
+                <div id="notif-list" class="notif-list">
+                    <!-- Notifications Injected Here -->
+                </div>
+            </div>
+
+            <!-- Toast Container -->
+            <div id="toast-container" class="toast-container"></div>
+
+            <style>
+                /* Notification Badge */
+                .notif-badge {
+                    position: absolute;
+                    top: 2px;
+                    right: 2px;
+                    width: 10px;
+                    height: 10px;
+                    background: var(--primary);
+                    border-radius: 50%;
+                    border: 1px solid #1d1c1c;
+                    display: none;
+                }
+
+                .notif-badge.active {
+                    display: block;
+                }
+
+                /* Notification Center */
+                .notif-center {
+                    position: absolute;
+                    top: 70px;
+                    right: 20px;
+                    width: 300px;
+                    max-height: 400px;
+                    background: #1E293B;
+                    border: 1px solid var(--glass-border);
+                    border-radius: 16px;
+                    z-index: 200;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                    animation: scaleIn 0.2s ease;
+                }
+
+                .notif-header {
+                    padding: 16px;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-bottom: 1px solid var(--glass-border);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .notif-header h3 {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                .notif-list {
+                    flex: 1;
+                    overflow-y: auto;
+                    padding: 0;
+                }
+
+                .notif-item {
+                    padding: 12px 16px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                    display: flex;
+                    gap: 12px;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                }
+
+                .notif-item:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                }
+
+                .notif-item.unread {
+                    background: rgba(79, 70, 229, 0.1);
+                }
+
+                .notif-icon {
+                    width: 32px;
+                    height: 32px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--primary);
+                    font-size: 14px;
+                }
+
+                .notif-content {
+                    flex: 1;
+                }
+
+                .notif-title {
+                    font-size: 13px;
+                    font-weight: 600;
+                    margin-bottom: 4px;
+                }
+
+                .notif-desc {
+                    font-size: 11px;
+                    color: var(--text-dim);
+                    line-height: 1.4;
+                }
+
+                .notif-time {
+                    font-size: 10px;
+                    color: var(--text-dim);
+                    margin-top: 6px;
+                    display: block;
+                    text-align: right;
+                }
+
+                /* Toast Notification */
+                .toast-container {
+                    position: absolute;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 300;
+                    width: 90%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    pointer-events: none;
+                }
+
+                .toast {
+                    background: rgba(30, 41, 59, 0.95);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid var(--glass-border);
+                    border-left: 4px solid var(--primary);
+                    border-radius: 12px;
+                    padding: 12px 16px;
+                    display: flex;
+                    gap: 12px;
+                    align-items: center;
+                    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+                    animation: slideDownToast 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    pointer-events: auto;
+                    cursor: pointer;
+                }
+
+                .toast-content {
+                    flex: 1;
+                }
+
+                .toast-title {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: white;
+                    margin-bottom: 2px;
+                }
+
+                .toast-desc {
+                    font-size: 11px;
+                    color: var(--text-dim);
+                }
+
+                .toast-close {
+                    color: var(--text-dim);
+                    cursor: pointer;
+                    padding: 4px;
+                }
+
+                @keyframes scaleIn {
+                    from {
+                        opacity: 0;
+                        transform: scale(0.9);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+
+                @keyframes slideDownToast {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-20px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                @keyframes shake {
+                    0% {
+                        transform: translateX(0);
+                    }
+
+                    25% {
+                        transform: translateX(2px);
+                    }
+
+                    50% {
+                        transform: translateX(-2px);
+                    }
+
+                    75% {
+                        transform: translateX(2px);
+                    }
+
+                    100% {
+                        transform: translateX(0);
+                    }
+                }
+            </style>
+
+            <script>
+                // Mock Notifications Data
+                const notifications = [
+                    { id: 1, title: "Materi Baru!", desc: "Modul 'Advanced Network Security' telah tersedia.", time: "Baru saja", icon: "fa-book", read: false },
+                    { id: 2, title: "Jadwal Live", desc: "Live Session dengan Mentor Budi dimulai dalam 30 menit.", time: "10 menit lalu", icon: "fa-video", read: false },
+                    { id: 3, title: "Sertifikat", desc: "Selamat! Anda lulus ujian Hardware Basics.", time: "1 jam lalu", icon: "fa-certificate", read: true }
+                ];
+
+                // 1. Notification Center Logic
+                function toggleNotifCenter() {
+                    const center = document.getElementById('notif-center');
+                    const badge = document.getElementById('notif-badge');
+
+                    if (center.style.display === 'none') {
+                        renderNotifications();
+                        center.style.display = 'flex';
+                        badge.classList.remove('active'); // Clear badge when opened
+                    } else {
+                        center.style.display = 'none';
+                    }
+                }
+
+                function renderNotifications() {
+                    const list = document.getElementById('notif-list');
+                    if (notifications.length === 0) {
+                        list.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-dim); font-size: 12px;">Belum ada notifikasi</div>';
+                        return;
+                    }
+
+                    list.innerHTML = notifications.map(n => `
+                        <div class="notif-item ${n.read ? '' : 'unread'}" onclick="handleNotifClick(${n.id})">
+                            <div class="notif-icon"><i class="fas ${n.icon}"></i></div>
+                            <div class="notif-content">
+                                <div class="notif-title">${n.title}</div>
+                                <div class="notif-desc">${n.desc}</div>
+                                <span class="notif-time">${n.time}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                function handleNotifClick(id) {
+                    alert(`Membuka notifikasi ID: ${id}`);
+                    // In real app: Navigate to detail page
+                }
+
+                // Initial Badge Check
+                const unreadCount = notifications.filter(n => !n.read).length;
+                if (unreadCount > 0) {
+                    document.getElementById('notif-badge').classList.add('active');
+                    // Shake animation for attention
+                    document.querySelector('.fa-bell').style.animation = 'shake 0.5s ease 2';
+                }
+
+                // 2. Toast Notification Function
+                function showToast(title, desc, icon = 'fa-info-circle') {
+                    const container = document.getElementById('toast-container');
+                    const toast = document.createElement('div');
+                    toast.className = 'toast';
+                    toast.innerHTML = `
+                        <i class="fas ${icon}" style="font-size: 18px; color: var(--primary);"></i>
+                        <div class="toast-content">
+                            <div class="toast-title">${title}</div>
+                            <div class="toast-desc">${desc}</div>
+                        </div>
+                        <i class="fas fa-times toast-close" onclick="this.parentElement.remove()"></i>
+                    `;
+
+                    // Swipe to close logic (Simple version)
+                    let touchStartX = 0;
+                    toast.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+                    toast.addEventListener('touchend', e => {
+                        if (e.changedTouches[0].clientX - touchStartX > 50) { // Swipe Right
+                            toast.style.transform = 'translateX(100%)';
+                            toast.style.opacity = '0';
+                            setTimeout(() => toast.remove(), 300);
+                        }
+                    });
+
+                    // Auto dismiss
+                    setTimeout(() => {
+                        if (toast.isConnected) {
+                            toast.style.opacity = '0';
+                            setTimeout(() => toast.remove(), 300);
+                        }
+                    }, 4000);
+
+                    // Click interaction
+                    toast.addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('toast-close')) {
+                            alert("Membuka detail notifikasi...");
+                        }
+                    });
+
+                    container.appendChild(toast);
+                }
+
+                // 3. Push Notification Logic
+                function requestPushPermission() {
+                    if (!("Notification" in window)) {
+                        console.log("Browser tidak mendukung notifikasi sistem");
+                        return;
+                    }
+
+                    if (Notification.permission === "granted") {
+                        // Already granted
+                    } else if (Notification.permission !== "denied") {
+                        Notification.requestPermission().then(permission => {
+                            if (permission === "granted") {
+                                new Notification("Notifikasi Diaktifkan", {
+                                    body: "Anda akan menerima update terbaru dari Nusalokal.",
+                                    icon: "https://via.placeholder.com/64"
+                                });
+                            }
+                        });
+                    }
+                }
+
+                // Demo: Simulate receiving a notification after 3 seconds
+                setTimeout(() => {
+                    showToast("Pesan Baru", "Mentor Budi membalas pertanyaan Anda di forum.", "fa-comment-alt");
+                    // requestPushPermission(); // Uncomment to test system notif
+                }, 3000);
+            </script>
+
+            <!-- Greeting -->
+            <div class="greeting-section">
+                <h1>Halo, Semuanya!</h1>
+                <p>Siap belajar hari ini?</p>
+            </div>
+
+            <!-- Search -->
+            <div class="search-wrapper" style="position: relative;">
+                <div class="search-container">
+                    <i class="fas fa-search" id="search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Cari materi troubleshooting..."
+                        autocomplete="off">
+                    <i class="fas fa-spinner fa-spin" id="loading-spinner"
+                        style="display: none; color: var(--primary);"></i>
+                </div>
+
+
+            </div>
+
+            <!-- Search Results Area (Hidden by default) -->
+            <div id="search-results-area" style="display: none; margin-top: 20px;">
+
+                <!-- Filter & Sort -->
+                <div class="filter-sort-bar">
+                    <div class="filter-chip active">Semua</div>
+                    <div class="filter-chip">Materi</div>
+                    <div class="filter-chip">Forum</div>
+                    <div class="sort-btn"><i class="fas fa-sort-amount-down"></i></div>
+                </div>
+
+                <!-- Content Container -->
+                <div id="results-content">
+                    <!-- Results will be injected here -->
+                </div>
+            </div>
+
+            <style>
+                /* Search Enhancements */
+
+
+                .filter-sort-bar {
+                    display: flex;
+                    gap: 8px;
+                    margin-bottom: 16px;
+                    overflow-x: auto;
+                    padding-bottom: 5px;
+                }
+
+                .filter-chip {
+                    padding: 6px 12px;
+                    border-radius: 20px;
+                    background: rgba(255, 255, 255, 0.05);
+                    border: 1px solid var(--glass-border);
+                    font-size: 12px;
+                    cursor: pointer;
+                    white-space: nowrap;
+                }
+
+                .filter-chip.active {
+                    background: var(--primary);
+                    border-color: var(--primary);
+                    color: white;
+                }
+
+                .sort-btn {
+                    margin-left: auto;
+                    padding: 6px 10px;
+                    color: var(--text-dim);
+                    cursor: pointer;
+                }
+
+                /* State Styles */
+                .empty-state,
+                .error-state {
+                    text-align: center;
+                    padding: 40px 20px;
+                    background: var(--glass);
+                    border-radius: 16px;
+                }
+
+                .state-icon {
+                    font-size: 40px;
+                    margin-bottom: 16px;
+                    opacity: 0.5;
+                }
+
+                .retry-btn {
+                    margin-top: 16px;
+                    padding: 8px 16px;
+                    background: var(--primary);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    cursor: pointer;
+                }
+
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            </style>
+
+            <script>
+                const searchInput = document.getElementById('search-input');
+
+                const loadingSpinner = document.getElementById('loading-spinner');
+                const searchIcon = document.getElementById('search-icon');
+                const resultsArea = document.getElementById('search-results-area');
+                const resultsContent = document.getElementById('results-content');
+
+                // Mock Data
+                const keywords = [
+                    "Network Troubleshooting", "Hardware Repair", "Software Debugging",
+                    "WiFi Slow", "Blue Screen", "Install Windows", "Server Down"
+                ];
+
+                const mockResults = [
+                    { title: "Panduan Dasar WiFi", type: "Materi", icon: "fa-wifi" },
+                    { title: "Cara Perbaiki RAM", type: "Hardware", icon: "fa-memory" },
+                    { title: "Diskusi: Error 404", type: "Forum", icon: "fa-comments" }
+                ];
+
+                // 1. Auto Suggest Logic
+                // 2. Search Trigger
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch(searchInput.value);
+                    }
+                });
+
+                // 3. Perform Search (Loading -> Result)
+                function performSearch(query) {
+                    // UI Reset
+                    searchIcon.style.display = 'none';
+                    loadingSpinner.style.display = 'block';
+                    resultsArea.style.display = 'none';
+
+                    // Hide main content (optional, or just overlay)
+                    document.querySelector('.section-label').style.display = 'none';
+                    document.querySelector('.featured-scroll').style.display = 'none';
+                    document.querySelector('.fav-list').previousElementSibling.style.display = 'none'; // hide label
+                    document.querySelector('.fav-list').style.display = 'none';
+
+
+                    // Simulate API Delay
+                    setTimeout(() => {
+                        loadingSpinner.style.display = 'none';
+                        searchIcon.style.display = 'block';
+                        resultsArea.style.display = 'block';
+
+                        const q = query.toLowerCase();
+
+                        if (q.includes('error')) {
+                            showError();
+                        } else if (q.includes('empty') || q.includes('kosong')) {
+                            showEmpty(query);
+                        } else {
+                            showResults(query);
+                        }
+
+                    }, 1500);
+                }
+
+                function showResults(query) {
+                    resultsContent.innerHTML = mockResults.map(item => `
+                        <div class="glass-card" style="margin-bottom: 12px; display: flex; align-items: center; gap: 16px;">
+                            <div class="fav-icon"><i class="fas ${item.icon}"></i></div>
+                            <div>
+                                <div class="card-title">${item.title}</div>
+                                <div class="card-sub">${item.type} • Relevan</div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                function showEmpty(query) {
+                    resultsContent.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-search state-icon"></i>
+                            <h3>Tidak ada hasil</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Kami tidak menemukan hasil untuk "${query}". Coba kata kunci lain.</p>
+                            <div style="margin-top: 20px; text-align: left;">
+                                <span style="font-size: 12px; color: var(--text-dim);">Saran kata kunci:</span>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+                                    <div class="filter-chip" onclick="selectSuggestion('Network')">Network</div>
+                                    <div class="filter-chip" onclick="selectSuggestion('Hardware')">Hardware</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                function showError() {
+                    resultsContent.innerHTML = `
+                        <div class="error-state">
+                            <i class="fas fa-exclamation-circle state-icon" style="color: var(--primary);"></i>
+                            <h3>Terjadi Kesalahan</h3>
+                            <p style="color: var(--text-dim); font-size: 13px;">Gagal memuat hasil pencarian. Periksa koneksi internet Anda.</p>
+                            <button class="retry-btn" onclick="performSearch(searchInput.value)">Coba Lagi</button>
+                        </div>
+                    `;
+                }
+            </script>
+
+            <!-- Categories -->
+            <span class="section-label">Bidang Utama</span>
+            <div class="featured-scroll">
+                <div class="glass-card">
+                    <i class="fas fa-network-wired card-icon"></i>
+                    <div class="card-title">Network<br>Troubleshoot</div>
+                    <div class="card-sub">Jaringan WiFi</div>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-tools card-icon"></i>
+                    <div class="card-title">Hardware<br>Repair</div>
+                    <div class="card-sub">Perbaikan Laptop</div>
+                </div>
+                <div class="glass-card">
+                    <i class="fas fa-bug card-icon"></i>
+                    <div class="card-title">Software<br>Debugging</div>
+                    <div class="card-sub">Problem Aplikasi</div>
+                </div>
+            </div>
+
+            <!-- Favorit -->
+            <span class="section-label">Bidang Favorit</span>
+            <div class="fav-list">
+                <div class="fav-item">
+                    <div class="fav-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="fav-info">
+                        <div class="fav-name">Keamanan Siber</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fav-item">
+                    <div class="fav-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="fav-info">
+                        <div class="fav-name">Cloud Computing</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fav-item">
+                    <div class="fav-icon"><i class="fas fa-database"></i></div>
+                    <div class="fav-info">
+                        <div class="fav-name">Administrasi Database</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="#" class="nav-item active"><i class="fas fa-home"></i><span>Beranda</span></a>
+            <a href="nusalokal_courses.html" class="nav-item"><i class="fas fa-book-open"></i><span>Kursus</span></a>
+            <a href="nusalokal_chat.html" class="nav-item"><i class="fas fa-robot"></i><span>AI Agent</span></a>
+            <a href="nusalokal_profile.html" class="nav-item"><i class="fas fa-user-circle"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+</body>
+
+</html>

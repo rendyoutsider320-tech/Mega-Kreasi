@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Kreatif - Profil Saya</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #fd0404;
+            --primary-dark: #b90303;
+            --secondary: #7C3AED;
+            --background: linear-gradient(135deg, #132653 0%, #1E293B 100%);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-strong: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-main: #F8FAFC;
+            --text-dim: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Device Frame */
+        .device-frame {
+            width: 375px;
+            height: 812px;
+            background: #1d1c1c;
+            border-radius: 40px;
+            border: 8px solid #334155;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Content Scrollable */
+        .t-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .t-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 40px 24px 30px;
+            background: linear-gradient(180deg, rgba(253, 4, 4, 0.15) 0%, rgba(19, 38, 83, 0) 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            background: #cbd5e1;
+            /* Placeholder */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #334155;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .edit-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #1d1c1c;
+            /* Match device bg */
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .user-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .user-email {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .edit-profile-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .edit-profile-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 24px;
+            margin-bottom: 30px;
+            gap: 12px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 16px 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        /* Menu List */
+        .menu-section {
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        .menu-list {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(4, 253, 4, 0.1);
+            /* Greenish tint for placeholder */
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: var(--primary);
+        }
+
+        .menu-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .menu-arrow {
+            color: var(--text-dim);
+            font-size: 12px;
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% - 48px);
+            margin: 0 auto 20px;
+            background: rgba(253, 4, 4, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Animation */
+        .animate-up {
+            animation: slideUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            padding: 12px 0;
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="device-frame">
+        <div class="t-content">
+            <!-- Header -->
+            <div class="profile-header animate-up" style="animation-delay: 0.1s;">
+                <div class="avatar-container">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="edit-badge">
+                        <i class="fas fa-pencil-alt" style="font-size: 12px;"></i>
+                    </div>
+                </div>
+                <div class="user-name">Rendy Dev</div>
+                <div class="user-email">rendy@megakreatif.com</div>
+                <button class="edit-profile-btn">Edit Profil</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-row animate-up" style="animation-delay: 0.2s;">
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Kursus</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">48</div>
+                    <div class="stat-label">Jam</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Sertifikat</div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="menu-section animate-up" style="animation-delay: 0.3s;">
+                <div class="section-title">Akun & Pengaturan</div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-user-cog"></i></div>
+                        <div class="menu-text">Detail Akun</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-wallet"></i></div>
+                        <div class="menu-text">Pembayaran</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-bell"></i></div>
+                        <div class="menu-text">Notifikasi</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-globe"></i></div>
+                        <div class="menu-text">Bahasa</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="menu-text">Keamanan & Privasi</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="section-title">Lainnya</div>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-question-circle"></i></div>
+                        <div class="menu-text">Pusat Bantuan</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-icon"><i class="fas fa-info-circle"></i></div>
+                        <div class="menu-text">Tentang Aplikasi</div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <a href="nusalokal_login.html" class="logout-btn animate-up"
+                style="animation-delay: 0.4s; text-decoration: none;">
+                <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i> Keluar
+            </a>
+
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+            <a href="nusalokal_mockup.html" class="nav-item"><i class="fas fa-home"></i><span>Beranda</span></a>
+            <a href="nusalokal_courses.html" class="nav-item"><i class="fas fa-book-open"></i><span>Kursus</span></a>
+            <a href="nusalokal_chat.html" class="nav-item"><i class="fas fa-robot"></i><span>AI Agent</span></a>
+            <a href="#" class="nav-item active"><i class="fas fa-user-circle"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+</body>
+
+</html>
