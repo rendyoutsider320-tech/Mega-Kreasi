@@ -2,7 +2,7 @@
   "name": "Nusalokal IT Learning",
   "short_name": "Nusalokal",
   "description": "Platform pembelajaran IT & Networking modern.",
-  "start_url": "nusalokal_login.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0F172A",
   "theme_color": "#fd0404",

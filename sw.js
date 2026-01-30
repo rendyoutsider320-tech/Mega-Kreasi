@@ -1,7 +1,7 @@
 const CACHE_NAME = 'nusalokal-v1';
 const ASSETS = [
   '/',
-  'nusalokal_login.html',
+  'index.html',
   'nusalokal_mockup.html',
   'nusalokal_courses.html',
   'nusalokal_chat.html',
