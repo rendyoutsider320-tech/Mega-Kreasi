@@ -99,16 +99,17 @@
             display: none;
         }
 
-        /* Header */
+        /* Header (Logo Bar) */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: calc(1rem + env(safe-area-inset-top)) 1.5rem 1rem;
+            padding: 1rem 1.5rem;
             position: sticky;
             top: 0;
             background: #1d1c1c;
             z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo-section {
@@ -147,6 +148,10 @@
         }
 
         /* Greeting */
+        .greeting-section {
+            padding: calc(1.5rem + env(safe-area-inset-top)) 1.5rem 0.5rem;
+        }
+
         .greeting-section h1 {
             font-size: 24px;
             font-weight: 700;
@@ -370,22 +375,6 @@
             }
         }
 
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 80rem;
-            height: 4.5rem;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(1rem);
-            border-top: 0.06rem solid var(--glass-border);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-        }
     </style>
 </head>
 
@@ -393,18 +382,26 @@
 
     <div class="device-frame">
         <div class="screen-content">
-            <!-- Header -->
+            <!-- Greeting (Top Content) -->
+            <div class="greeting-section animate-up">
+                <h1>Halo, Semuanya!</h1>
+                <p>Mau belajar apa hari ini?</p>
+            </div>
+
+            <!-- Header (Sticky Logo Bar) -->
             <header>
                 <div class="logo-section">
                     <div class="logo-icon">M</div>
-                    <span style="font-weight: 700; font-size: 18px;">Mega Kreatif</span>
+                    <span style="font-weight: 700; font-size: 18px;">Mega <span
+                            style="color: var(--primary);">Kreatif</span></span>
                 </div>
                 <div class="profile-badges">
                     <div class="icon-btn" id="notif-btn" onclick="toggleNotifCenter()">
                         <i class="fas fa-bell"></i>
                         <div class="notif-badge" id="notif-badge"></div>
                     </div>
-                    <div class="icon-btn"><i class="fas fa-user"></i></div>
+                    <div class="icon-btn" onclick="window.location.href='nusalokal_profile.html'"><i
+                            class="fas fa-user"></i></div>
                 </div>
             </header>
 
@@ -755,11 +752,6 @@
                 }, 3000);
             </script>
 
-            <!-- Greeting -->
-            <div class="greeting-section">
-                <h1>Halo, Semuanya!</h1>
-                <p>Siap belajar hari ini?</p>
-            </div>
 
             <!-- Search -->
             <div class="search-wrapper" style="position: relative;">
