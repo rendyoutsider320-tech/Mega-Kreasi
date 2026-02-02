@@ -325,13 +325,7 @@
 
         /* Navigation */
         nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 80rem;
-            height: calc(4.5rem + env(safe-area-inset-bottom));
+            padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(1rem);
             -webkit-backdrop-filter: blur(1rem);
@@ -339,7 +333,7 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding-bottom: env(safe-area-inset-bottom);
+            position: relative;
             z-index: 1000;
         }
 
@@ -375,22 +369,6 @@
             }
         }
 
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 80rem;
-            height: 4.5rem;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(1rem);
-            border-top: 0.06rem solid var(--glass-border);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-        }
     </style>
 </head>
 

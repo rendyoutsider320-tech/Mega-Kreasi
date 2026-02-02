@@ -475,8 +475,7 @@
             border-top: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-around;
-            position: sticky;
-            bottom: 0;
+            position: relative;
             z-index: 20;
         }
 
@@ -500,31 +499,11 @@
 
         /* Responsive Handling */
         @media (max-width: 32rem) {
-            nav {
-                height: 4.5rem;
-            }
-
             .chat-area {
                 padding: 1rem;
             }
         }
 
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 80rem;
-            height: 4.5rem;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(1rem);
-            border-top: 0.06rem solid var(--glass-border);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 1000;
-        }
     </style>
 </head>
 
