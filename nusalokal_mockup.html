@@ -99,14 +99,12 @@
             display: none;
         }
 
-        /* Header (Logo Bar) */
+        /* Header (Fixed Logo Bar at Top) */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            position: sticky;
-            top: 0;
+            padding: calc(1rem + env(safe-area-inset-top)) 1.5rem 1rem;
             background: #1d1c1c;
             z-index: 100;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -149,7 +147,7 @@
 
         /* Greeting */
         .greeting-section {
-            padding: calc(1.5rem + env(safe-area-inset-top)) 1.5rem 0.5rem;
+            padding: 1.5rem 1.5rem 0.5rem;
         }
 
         .greeting-section h1 {
@@ -381,29 +379,29 @@
 <body>
 
     <div class="device-frame">
+        <!-- Header (Fixed at the very top) -->
+        <header>
+            <div class="logo-section">
+                <div class="logo-icon">M</div>
+                <span style="font-weight: 700; font-size: 18px;">Mega <span
+                        style="color: var(--primary);">Kreatif</span></span>
+            </div>
+            <div class="profile-badges">
+                <div class="icon-btn" id="notif-btn" onclick="toggleNotifCenter()">
+                    <i class="fas fa-bell"></i>
+                    <div class="notif-badge" id="notif-badge"></div>
+                </div>
+                <div class="icon-btn" onclick="window.location.href='nusalokal_profile.html'"><i class="fas fa-user"></i>
+                </div>
+            </div>
+        </header>
+
         <div class="screen-content">
-            <!-- Greeting (Top Content) -->
+            <!-- Greeting (Top of scrollable content) -->
             <div class="greeting-section animate-up">
                 <h1>Halo, Semuanya!</h1>
                 <p>Mau belajar apa hari ini?</p>
             </div>
-
-            <!-- Header (Sticky Logo Bar) -->
-            <header>
-                <div class="logo-section">
-                    <div class="logo-icon">M</div>
-                    <span style="font-weight: 700; font-size: 18px;">Mega <span
-                            style="color: var(--primary);">Kreatif</span></span>
-                </div>
-                <div class="profile-badges">
-                    <div class="icon-btn" id="notif-btn" onclick="toggleNotifCenter()">
-                        <i class="fas fa-bell"></i>
-                        <div class="notif-badge" id="notif-badge"></div>
-                    </div>
-                    <div class="icon-btn" onclick="window.location.href='nusalokal_profile.html'"><i
-                            class="fas fa-user"></i></div>
-                </div>
-            </header>
 
             <!-- Notification Center (Hidden by Default) -->
             <div id="notif-center" class="notif-center" style="display: none;">
