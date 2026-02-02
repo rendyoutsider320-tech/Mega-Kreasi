@@ -10,315 +10,16 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="auth-style.css">
     <meta name="theme-color" content="#fd0404">
-    <style>
-        :root {
-            --primary: #fd0404;
-            --secondary: #7C3AED;
-            --background: linear-gradient(135deg, #132653 0%, #1E293B 100%);
-            --glass: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --text-main: #F8FAFC;
-            --text-dim: #94A3B8;
-            --glow: 0 0 15px rgba(79, 70, 229, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background: var(--background);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-
-        /* Abstract Background Elements */
-        .blob {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.15;
-        }
-
-        .blob-1 {
-            top: -100px;
-            right: -50px;
-        }
-
-        .blob-2 {
-            bottom: -100px;
-            left: -50px;
-            background: var(--primary);
-        }
-
-        /* Device Frame Sim */
-        .device-frame {
-            width: 375px;
-            height: 812px;
-            background: #1d1c1c;
-            border-radius: 40px;
-            border: 8px solid #334155;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.6);
-        }
-
-        .screen-content {
-            width: 100%;
-            height: 100%;
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Logo Area */
-        .logo-container {
-            margin-bottom: 40px;
-            text-align: center;
-            animation: slideDown 0.8s ease;
-        }
-
-        .logo-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0 auto 12px;
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        /* Login Card */
-        .login-card {
-            width: 100%;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px 20px;
-            animation: slideUp 0.8s ease;
-        }
-
-        .welcome-text {
-            margin-bottom: 24px;
-        }
-
-        .welcome-text h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .welcome-text p {
-            font-size: 13px;
-            color: var(--text-dim);
-        }
-
-        /* Form Elements */
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-dim);
-            font-size: 16px;
-        }
-
-        .input-group input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 14px 16px 14px 48px;
-            color: white;
-            font-size: 14px;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: var(--primary);
-            box-shadow: var(--glow);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .forgot-pass {
-            display: block;
-            text-align: right;
-            font-size: 12px;
-            color: var(--primary);
-            text-decoration: none;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 12px;
-            padding: 16px;
-            color: white;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
-            text-decoration: none;
-            display: block;
-            text-align: center;
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        /* Divider */
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 24px 0;
-            color: var(--text-dim);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--glass-border);
-        }
-
-        /* Social Login */
-        .social-login {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-btn.google:hover {
-            border-color: #DB4437;
-            background: rgba(219, 68, 55, 0.1);
-            box-shadow: 0 0 15px rgba(219, 68, 55, 0.2);
-        }
-
-        .social-btn.microsoft:hover {
-            border-color: #00A4EF;
-            background: rgba(0, 164, 239, 0.1);
-            box-shadow: 0 0 15px rgba(0, 164, 239, 0.2);
-        }
-
-        .social-btn.yahoo:hover {
-            border-color: #6001D2;
-            background: rgba(96, 1, 210, 0.1);
-            box-shadow: 0 0 15px rgba(96, 1, 210, 0.2);
-        }
-
-
-
-        .social-btn img {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Footer */
-        .signup-text {
-            margin-top: 30px;
-            font-size: 13px;
-            color: var(--text-dim);
-        }
-
-        .signup-text a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* Animations */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 </head>
 
 <body>
 
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+
+    <div id="toast-container" class="toast-container"></div>
 
     <div class="device-frame">
         <div class="screen-content">
@@ -329,31 +30,16 @@
             </div>
 
             <!-- Login Card -->
-            <div class="login-card">
+            <div class="auth-card">
                 <div class="welcome-text">
-                    <h2>Selamat Datang</h2>
-                    <p>Masuk untuk melanjutkan belajar.</p>
+                    <h2>Masuk ke Akun</h2>
+                    <p>Pilih metode tercepat untuk lanjut belajar.</p>
                 </div>
 
-                <form>
-                    <div class="input-group">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email Anda" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password Anda" required>
-                    </div>
-                    <a href="nusalokal_forgot_password.html" class="forgot-pass">Lupa Password?</a>
-
-                    <a href="nusalokal_mockup.html" class="btn-primary">Masuk</a>
-                </form>
-
-                <div class="divider">Atau masuk dengan</div>
-
-                <div class="social-login">
-                    <div class="social-btn google" title="Masuk dengan Google" onclick="loginWithGoogle(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+                <!-- SSO Options -->
+                <div class="sso-container">
+                    <button class="btn-sso google" onclick="handleSSOLogin('Google')">
+                        <svg viewBox="0 0 48 48">
                             <path fill="#EA4335"
                                 d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
                             <path fill="#4285F4"
@@ -362,95 +48,121 @@
                                 d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
                             <path fill="#34A853"
                                 d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
-                            <path fill="none" d="M0 0h48v48H0z" />
                         </svg>
-                    </div>
-                    <div class="social-btn microsoft" title="Masuk dengan Microsoft" onclick="loginWithMicrosoft(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="24px" height="24px">
+                        <span>Google</span>
+                    </button>
+                    <button class="btn-sso microsoft" onclick="handleSSOLogin('Microsoft')">
+                        <svg viewBox="0 0 23 23">
                             <path fill="#f35325" d="M1 1h10v10H1z" />
                             <path fill="#81bc06" d="M12 1h10v10H12z" />
                             <path fill="#05a6f0" d="M1 12h10v10H1z" />
                             <path fill="#ffba08" d="M12 12h10v10H12z" />
                         </svg>
-                    </div>
-                    <div class="social-btn yahoo" title="Masuk dengan Yahoo" onclick="loginWithYahoo(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24px" height="24px">
+                        <span>Microsoft</span>
+                    </button>
+                    <button class="btn-sso yahoo" onclick="handleSSOLogin('Yahoo')">
+                        <svg viewBox="0 0 512 512">
                             <path fill="#6001D2"
                                 d="M228.6 206.5L138.8 8h68.6l54.9 146.9L320.1 8h63.7l-92.4 200v120h-62.8V206.5H228.6z" />
                         </svg>
-                    </div>
+                        <span>Yahoo</span>
+                    </button>
                 </div>
+
+                <div class="divider">atau login manual</div>
+
+                <form id="login-form" novalidate>
+                    <div class="input-group" id="email-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email Anda" autocomplete="email">
+                        <div class="error-msg" id="email-error"></div>
+                    </div>
+                    <div class="input-group" id="password-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password Anda">
+                        <div class="error-msg" id="password-error"></div>
+                    </div>
+                    <a href="nusalokal_forgot_password.html" class="forgot-pass">Lupa Password?</a>
+
+                    <button type="submit" class="btn-primary">Masuk</button>
+                </form>
             </div>
 
-            <div class="signup-text">
-                Belum punya akun? <a href="#">Daftar Sekarang</a>
+            <div class="auth-footer">
+                Belum punya akun? <a href="nusalokal_register.html">Daftar Sekarang</a>
             </div>
         </div>
     </div>
 
+    <script src="auth-logic.js"></script>
     <script>
-        function loginWithMicrosoft(element) {
-            // Prevent double clicks
-            if (element.classList.contains('loading')) return;
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailGroup = document.getElementById('email-group');
+        const passwordGroup = document.getElementById('password-group');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
 
-            // Save original content
-            const originalContent = element.innerHTML;
-
-            // Add loading state
-            element.classList.add('loading');
-            element.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            element.style.cursor = 'wait';
-
-            // Simulate API call and redirect
-            setTimeout(() => {
-                window.location.href = 'nusalokal_mockup.html';
-            }, 1500);
+        function validateEmail(email) {
+            if (!email) return "Email wajib diisi";
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!re.test(email)) return "Format email tidak valid";
+            return "";
         }
 
-        function loginWithGoogle(element) {
-            // Prevent double clicks
-            if (element.classList.contains('loading')) return;
-
-            // Save original content
-            const originalContent = element.innerHTML;
-
-            // Add loading state
-            element.classList.add('loading');
-            element.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            element.style.cursor = 'wait';
-
-            // Simulate API call and redirect
-            setTimeout(() => {
-                window.location.href = 'nusalokal_mockup.html';
-            }, 1500);
+        function validatePassword(password) {
+            if (!password) return "Password wajib diisi";
+            return "";
         }
 
-        function loginWithYahoo(element) {
-            // Prevent double clicks
-            if (element.classList.contains('loading')) return;
+        // Real-time validation
+        emailInput.addEventListener('input', () => showError(emailGroup, emailError, validateEmail(emailInput.value)));
+        passwordInput.addEventListener('input', () => showError(passwordGroup, passwordError, validatePassword(passwordInput.value)));
 
-            // Save original content
-            const originalContent = element.innerHTML;
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            if (submitBtn.disabled) return;
 
-            // Add loading state
-            element.classList.add('loading');
-            element.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            element.style.cursor = 'wait';
+            const emailErr = validateEmail(emailInput.value);
+            const passErr = validatePassword(passwordInput.value);
 
-            // Simulate API call and redirect
-            setTimeout(() => {
-                window.location.href = 'nusalokal_mockup.html';
-            }, 1500);
-        }
+            showError(emailGroup, emailError, emailErr);
+            showError(passwordGroup, passwordError, passErr);
 
-        // PWA Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Service Worker registered!'))
-                    .catch(err => console.log('Service Worker failed:', err));
-            });
-        }
+            if (!emailErr && !passErr) {
+                submitBtn.disabled = true;
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Masuk...';
+
+                // Simulate Login
+                setTimeout(() => {
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    const users = getRegisteredUsers();
+
+                    const user = users.find(u => u.email === email && u.password === password) ||
+                        (email === "test@example.com" && password === "password123" ? { name: 'Demo User', email: 'test@example.com' } : null);
+
+                    if (user) {
+                        showToast(`Selamat datang kembali, ${user.name}!`, 'success');
+                        localStorage.setItem('user_session', JSON.stringify({
+                            email: user.email,
+                            name: user.name,
+                            token: 'mock-' + Date.now()
+                        }));
+                        setTimeout(() => window.location.href = 'nusalokal_mockup.html', 1000);
+                    } else {
+                        showToast('Email atau password salah', 'error');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    }
+                }, 1500);
+            }
+        });
     </script>
 
 </body>

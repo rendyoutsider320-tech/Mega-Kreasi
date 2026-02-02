@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Kreatif - Daftar Akun</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="auth-style.css">
+    <meta name="theme-color" content="#fd0404">
+</head>
+
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div class="device-frame">
+        <div class="screen-content">
+            <!-- Logo -->
+            <div class="logo-container">
+                <div class="logo-icon">M</div>
+                <div class="logo-text">Mega Kreatif</div>
+            </div>
+
+            <!-- Register Card -->
+            <div class="auth-card">
+                <div class="welcome-text">
+                    <h2>Buat Akun Baru</h2>
+                    <p>Mulai perjalanan belajarmu sekarang.</p>
+                </div>
+
+                <form id="register-form" novalidate>
+                    <div class="input-group" id="name-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="name" placeholder="Nama Lengkap" autocomplete="name">
+                        <div class="error-msg" id="name-error"></div>
+                    </div>
+                    <div class="input-group" id="email-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Email Anda" autocomplete="email">
+                        <div class="error-msg" id="email-error"></div>
+                    </div>
+                    <div class="input-group" id="password-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password Baru">
+                        <div class="error-msg" id="password-error"></div>
+                    </div>
+                    <div class="input-group" id="confirm-password-group">
+                        <i class="fas fa-shield-halved"></i>
+                        <input type="password" id="confirm-password" placeholder="Konfirmasi Password">
+                        <div class="error-msg" id="confirm-password-error"></div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Daftar Sekarang</button>
+                </form>
+            </div>
+
+            <div class="auth-footer">
+                Sudah punya akun? <a href="index.html">Masuk</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth-logic.js"></script>
+    <script>
+        const registerForm = document.getElementById('register-form');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+
+        const nameGroup = document.getElementById('name-group');
+        const emailGroup = document.getElementById('email-group');
+        const passwordGroup = document.getElementById('password-group');
+        const confirmPasswordGroup = document.getElementById('confirm-password-group');
+
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+        const confirmPasswordError = document.getElementById('confirm-password-error');
+
+        function validateName(name) {
+            if (!name) return "Nama wajib diisi";
+            if (name.length < 3) return "Nama minimal 3 karakter";
+            return "";
+        }
+
+        function validateEmail(email) {
+            if (!email) return "Email wajib diisi";
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!re.test(email)) return "Format email tidak valid";
+            return "";
+        }
+
+        function validatePassword(password) {
+            if (!password) return "Password wajib diisi";
+            if (password.length < 8) return "Password minimal 8 karakter";
+            return "";
+        }
+
+        function validateConfirmPassword(pass, confirmPass) {
+            if (!confirmPass) return "Konfirmasi password wajib diisi";
+            if (pass !== confirmPass) return "Password tidak cocok";
+            return "";
+        }
+
+        // Real-time validation
+        nameInput.addEventListener('input', () => showError(nameGroup, nameError, validateName(nameInput.value)));
+        emailInput.addEventListener('input', () => showError(emailGroup, emailError, validateEmail(emailInput.value)));
+        passwordInput.addEventListener('input', () => showError(passwordGroup, passwordError, validatePassword(passwordInput.value)));
+        confirmPasswordInput.addEventListener('input', () => showError(confirmPasswordGroup, confirmPasswordError, validateConfirmPassword(passwordInput.value, confirmPasswordInput.value)));
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = registerForm.querySelector('button[type="submit"]');
+            if (submitBtn.disabled) return;
+
+            const nameErr = validateName(nameInput.value);
+            const emailErr = validateEmail(emailInput.value);
+            const passErr = validatePassword(passwordInput.value);
+            const confirmPassErr = validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
+
+            showError(nameGroup, nameError, nameErr);
+            showError(emailGroup, emailError, emailErr);
+            showError(passwordGroup, passwordError, passErr);
+            showError(confirmPasswordGroup, confirmPasswordError, confirmPassErr);
+
+            if (!nameErr && !emailErr && !passErr && !confirmPassErr) {
+                submitBtn.disabled = true;
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mendaftar...';
+
+                setTimeout(() => {
+                    const users = getRegisteredUsers();
+                    if (users.some(u => u.email === emailInput.value)) {
+                        showToast('Email sudah terdaftar!', 'error');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                        return;
+                    }
+
+                    saveUser({
+                        name: nameInput.value,
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    });
+
+                    showToast('Pendaftaran berhasil! Mengalihkan...', 'success');
+                    setTimeout(() => window.location.href = 'index.html', 1500);
+                }, 1500);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -7,6 +7,10 @@ const ASSETS = [
   'nusalokal_chat.html',
   'nusalokal_profile.html',
   'nusalokal_forgot_password.html',
+  'nusalokal_register.html',
+  'nusalokal_login.html',
+  'auth-style.css',
+  'auth-logic.js',
   'manifest.json'
 ];
 
