@@ -106,46 +106,34 @@
         }
 
         /* Hero Image */
+        /* Hero Background Video */
         .hero-banner {
             width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            height: 200px;
+            background: #000;
             border-radius: 20px;
             margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%) scale(1.5);
+            pointer-events: none;
+            border: none;
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover;
-            opacity: 0.4;
-            mix-blend-mode: overlay;
-        }
-
-        .play-btn {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            z-index: 10;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .play-btn:active {
-            transform: scale(0.9);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
+            z-index: 1;
         }
 
         /* Module List */
@@ -388,10 +376,11 @@
                 </div>
             </div>
 
-            <!-- Hero Banner -->
-            <div class="hero-banner" onclick="openModule(1)">
+            <!-- Hero Banner with Background Video -->
+            <div class="hero-banner">
+                <iframe id="hero-video-iframe" class="hero-video-bg" allow="autoplay; encrypted-media"
+                    frameborder="0"></iframe>
                 <div class="hero-overlay"></div>
-                <div class="play-btn"><i class="fas fa-play"></i></div>
             </div>
 
             <!-- Description -->
@@ -514,6 +503,22 @@
         </nav>
     </div>
 
+    <!-- Video Modal -->
+    <div id="video-modal"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+        <div style="width: 95%; max-width: 850px; position: relative;">
+            <div
+                style="padding-top: 56.25%; position: relative; background: #000; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.8);">
+                <iframe id="video-frame"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <button onclick="closeVideoModal()"
+                style="position: absolute; top: -50px; right: 0; background: rgba(255,255,255,0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; backdrop-filter: blur(5px);"><i
+                    class="fas fa-times"></i></button>
+        </div>
+    </div>
+
     <script src="auth-logic.js"></script>
     <script>
         const modules = {
@@ -622,6 +627,30 @@
                 }
             }, 300);
         }
+
+        const itVideos = [
+            'Ssh71heNhXY', // What is IT?
+            '7_LPdttKXPc', // Coding for beginners
+            '5WSTpIghp_U', // Hardware repair
+            'tovf_IiaUo0', // Networking basics
+            '3Qn3X7W5S2k'  // Cybersecurity
+        ];
+
+        function initHeroVideo() {
+            const randomId = itVideos[Math.floor(Math.random() * itVideos.length)];
+            const iframe = document.getElementById('hero-video-iframe');
+            if (iframe) {
+                // Autoplay, Mute (required for autoplay), Loop, and Hide Controls
+                iframe.src = `https://www.youtube.com/embed/${randomId}?autoplay=1&mute=1&loop=1&playlist=${randomId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3`;
+            }
+        }
+
+        function playRandomVideo() {
+            initHeroVideo(); // Re-randomize if clicked or just let it loop
+        }
+
+        // Initialize background video on load
+        document.addEventListener('DOMContentLoaded', initHeroVideo);
     </script>
 </body>
 
