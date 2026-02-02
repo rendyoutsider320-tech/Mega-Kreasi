@@ -52,7 +52,7 @@
                 background: #1d1c1c;
                 /* Seamless dark on mobile */
                 display: block;
-                overflow-y: auto;
+                overflow: hidden; /* Prevent body scroll, use t-content */
             }
         }
 
@@ -87,7 +87,7 @@
         .t-content {
             flex: 1;
             overflow-y: auto;
-            padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+            padding-bottom: calc(2rem + env(safe-area-inset-bottom));
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
         }
@@ -785,6 +785,11 @@
                     window.location.href = 'index.html';
                 }, 1500);
             }
+        }
+    </script>
+</body>
+
+</html>            }
         }
     </script>
 </body>
