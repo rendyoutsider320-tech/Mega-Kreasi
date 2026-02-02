@@ -628,16 +628,16 @@
             }, 300);
         }
 
-        const aiVideos = [
-            'ad79nYk2keg', // What is Artificial Intelligence?
-            '2ePf9rue1Ao', // Generative AI Explained
-            'aircAruvnKk', // Neural Networks Basics
-            '5wdUo57G_Qk', // How AI works
-            'mJeNghnytWw'  // Machine Learning for beginners
+        const itVideos = [
+            'QJncFirhjPg', // Cloud Computing Trends
+            'I_t66o9I9V0', // Modern Data Center Tour
+            'U_PzX_U-D5Y', // Cybersecurity Essentials
+            'H3AnSshR4mI', // The Future of Technology
+            '6mBO2JXKJuo'  // Internet of Things (IoT)
         ];
 
         function initHeroVideo() {
-            const randomId = aiVideos[Math.floor(Math.random() * aiVideos.length)];
+            const randomId = itVideos[Math.floor(Math.random() * itVideos.length)];
             const iframe = document.getElementById('hero-video-iframe');
             if (iframe) {
                 // Autoplay, Mute, Loop, and Minimal UI
@@ -646,7 +646,7 @@
         }
 
         function playRandomVideo() {
-            initHeroVideo(); // Re-randomize if clicked or just let it loop
+            initHeroVideo();
         }
 
         // Initialize background video on load
