@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#fd0404">
     <title>Mega Kreatif - Profil Saya</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,12 +36,14 @@
             background: var(--background);
             color: var(--text-main);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
             margin: 0;
             overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Mobile full-screen */
@@ -62,15 +66,14 @@
         /* Main Container - Fully Responsive */
         .device-frame {
             width: 100%;
-            min-height: 100vh;
+            height: 100vh;
+            height: 100dvh;
             background: #1d1c1c;
             position: relative;
             display: flex;
             flex-direction: column;
             margin: 0 auto;
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
+            overflow: hidden;
         }
 
         /* Desktop Max Width */
@@ -80,21 +83,13 @@
             }
         }
 
-        .t-content {
-            flex: 1;
-            width: 100%;
-            max-width: 75rem;
-            margin: 0 auto;
-            padding: 2rem 0;
-            padding-bottom: 7rem;
-            overflow-y: auto;
-        }
-
         /* Content Scrollable */
         .t-content {
             flex: 1;
             overflow-y: auto;
-            padding-bottom: 20px;
+            padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .t-content::-webkit-scrollbar {
@@ -433,7 +428,8 @@
             border-radius: 12px;
             padding: 12px 16px;
             color: white;
-            font-size: 14px;
+            font-size: 16px;
+            /* Native feel, prevents zoom */
         }
 
         .switch-group {
@@ -504,6 +500,7 @@
             height: calc(4.5rem + env(safe-area-inset-bottom));
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(1rem);
+            -webkit-backdrop-filter: blur(1rem);
             border-top: 0.06rem solid var(--glass-border);
             display: flex;
             justify-content: space-around;
