@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Nusalokal - Kursus IT & Networking</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,7 +35,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2.5vh 2.5vw;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Mobile full-screen */
+        @media (max-width: 48rem) {
+            body {
+                background: #1d1c1c;
+                /* Seamless dark on mobile */
+                display: block;
+                overflow-y: auto;
+            }
+        }
+
+        /* Desktop specific padding */
+        @media (min-width: 48rem) {
+            body {
+                padding: 2.5vh 2.5vw;
+            }
         }
 
         /* Main Container - Fully Responsive */
@@ -78,7 +97,11 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 24px;
+            padding: calc(1rem + env(safe-area-inset-top)) 1.5rem 1rem;
+            position: sticky;
+            top: 0;
+            background: #1d1c1c;
+            z-index: 100;
         }
 
         .back-btn {
@@ -303,13 +326,14 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 80rem;
-            height: 4.5rem;
+            height: calc(4.5rem + env(safe-area-inset-bottom));
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(1rem);
             border-top: 0.06rem solid var(--glass-border);
             display: flex;
             justify-content: space-around;
             align-items: center;
+            padding-bottom: env(safe-area-inset-bottom);
             z-index: 1000;
         }
 

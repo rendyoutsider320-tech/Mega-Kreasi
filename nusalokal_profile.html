@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Mega Kreatif - Profil Saya</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,7 +37,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2.5vh 2.5vw;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Mobile full-screen */
+        @media (max-width: 48rem) {
+            body {
+                background: #1d1c1c;
+                /* Seamless dark on mobile */
+                display: block;
+                overflow-y: auto;
+            }
+        }
+
+        /* Desktop specific padding */
+        @media (min-width: 48rem) {
+            body {
+                padding: 2.5vh 2.5vw;
+            }
         }
 
         /* Main Container - Fully Responsive */
@@ -84,7 +103,7 @@
 
         /* Profile Header */
         .profile-header {
-            padding: 40px 24px 30px;
+            padding: calc(40px + env(safe-area-inset-top)) 24px 30px;
             background: linear-gradient(180deg, rgba(253, 4, 4, 0.15) 0%, rgba(19, 38, 83, 0) 100%);
             text-align: center;
             position: relative;
@@ -474,15 +493,41 @@
             }
         }
 
-        @media (max-width: 32rem) {
-            .t-content {
-                padding-bottom: 6rem;
-            }
+        /* Navigation */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 80rem;
+            height: calc(4.5rem + env(safe-area-inset-bottom));
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(1rem);
+            border-top: 0.06rem solid var(--glass-border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 1000;
+        }
 
-            .modal-container {
-                border-radius: 1.25rem 1.25rem 0 0;
-                padding: 1.25rem;
-            }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 20px;
         }
     </style>
 </head>

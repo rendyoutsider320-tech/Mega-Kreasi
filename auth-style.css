@@ -25,8 +25,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2vh;
+    padding: 0;
+    margin: 0;
     overflow: hidden;
+}
+
+/* Mobile specific full-screen */
+@media (max-width: 48rem) {
+    body {
+        background: #1d1c1c;
+        /* Seamless dark on mobile */
+    }
+}
+
+/* Desktop specific padding */
+@media (min-width: 48rem) {
+    body {
+        padding: 2vh;
+    }
 }
 
 /* Abstract Background Elements */
