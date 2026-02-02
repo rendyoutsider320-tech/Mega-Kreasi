@@ -628,19 +628,19 @@
             }, 300);
         }
 
-        const itVideos = [
-            'Ssh71heNhXY', // What is IT?
-            '7_LPdttKXPc', // Coding for beginners
-            '5WSTpIghp_U', // Hardware repair
-            'tovf_IiaUo0', // Networking basics
-            '3Qn3X7W5S2k'  // Cybersecurity
+        const aiVideos = [
+            'ad79nYk2keg', // What is Artificial Intelligence?
+            '2ePf9rue1Ao', // Generative AI Explained
+            'aircAruvnKk', // Neural Networks Basics
+            '5wdUo57G_Qk', // How AI works
+            'mJeNghnytWw'  // Machine Learning for beginners
         ];
 
         function initHeroVideo() {
-            const randomId = itVideos[Math.floor(Math.random() * itVideos.length)];
+            const randomId = aiVideos[Math.floor(Math.random() * aiVideos.length)];
             const iframe = document.getElementById('hero-video-iframe');
             if (iframe) {
-                // Autoplay, Mute (required for autoplay), Loop, and Hide Controls
+                // Autoplay, Mute, Loop, and Minimal UI
                 iframe.src = `https://www.youtube.com/embed/${randomId}?autoplay=1&mute=1&loop=1&playlist=${randomId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3`;
             }
         }
