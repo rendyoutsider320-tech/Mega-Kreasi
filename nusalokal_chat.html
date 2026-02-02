@@ -53,7 +53,7 @@
                 background: #1d1c1c;
                 /* Seamless dark on mobile */
                 display: block;
-                overflow-y: auto;
+                overflow: hidden;
             }
         }
 
@@ -300,6 +300,7 @@
             backdrop-filter: blur(10px);
             border-top: 1px solid var(--glass-border);
             z-index: 10;
+            padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
         }
 
         /* Quick Replies */
@@ -466,17 +467,24 @@
             }
         }
 
-        /* Bottom Nav */
+        /* Bottom Nav (Fixed for Mobile) */
         nav {
-            padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
-            background: rgba(15, 23, 42, 0.95);
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 80rem;
+            height: calc(4.5rem + env(safe-area-inset-bottom));
+            background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-top: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-around;
-            position: relative;
-            z-index: 20;
+            align-items: center;
+            padding-bottom: env(safe-area-inset-bottom);
+            z-index: 2000;
         }
 
         .nav-item {
