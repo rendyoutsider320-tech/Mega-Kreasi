@@ -318,15 +318,24 @@
             z-index: 2000;
         }
 
+        /* Desktop Optimization */
+        @media (min-width: 48rem) {
+            nav {
+                justify-content: center;
+                gap: 4rem;
+            }
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             color: var(--text-dim);
             text-decoration: none;
             font-size: 10px;
             transition: color 0.3s;
+            padding: 4px 0;
         }
 
         .nav-item.active {

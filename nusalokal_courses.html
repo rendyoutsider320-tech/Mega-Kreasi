@@ -556,15 +556,55 @@
                 title: "Topologi Jaringan",
                 content: `
                     <h3>Pengertian Topologi</h3>
-                    <p>Topologi adalah cara bagaimana perangkat dalam jaringan dihubungkan satu sama lain.</p>
+                    <p>Topologi jaringan mengacu pada tata letak fisik atau logis dari perangkat dalam jaringan. Pemilihan topologi yang tepat mempengaruhi kecepatan, keamanan, dan kemudahan troubleshooting jaringan.</p>
                     
-                    <h3>Macam-macam Topologi:</h3>
-                    <ul>
-                        <li><strong>Bus:</strong> Menggunakan satu kabel utama sebagai backbone.</li>
-                        <li><strong>Star:</strong> Semua perangkat terhubung ke satu pusat (Switch/Hub). Paling umum digunakan.</li>
-                        <li><strong>Ring:</strong> Perangkat terhubung melingkar seperti cincin.</li>
-                        <li><strong>Mesh:</strong> Setiap perangkat terhubung ke perangkat lain secara langsung.</li>
-                    </ul>
+                    <h3>Jenis-Jenis Topologi Jaringan:</h3>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="color: var(--primary); margin-bottom: 4px;">1. Topologi Bus</h4>
+                        <p style="margin-bottom: 4px;">Semua perangkat terhubung ke satu kabel utama (backbone). Data dikirim ke semua perangkat, tetapi hanya penerima yang dituju yang memprosesnya.</p>
+                        <ul style="font-size: 13px; color: var(--text-dim);">
+                            <li>(+) Hemat kabel dan mudah instalasi.</li>
+                            <li>(-) Jika kabel utama putus, seluruh jaringan mati.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="color: var(--primary); margin-bottom: 4px;">2. Topologi Star (Bintang)</h4>
+                        <p style="margin-bottom: 4px;">Setiap perangkat terhubung ke satu perangkat pusat (Switch atau Hub). Ini adalah topologi paling umum digunakan saat ini (contoh: LAN kantor/rumah).</p>
+                        <ul style="font-size: 13px; color: var(--text-dim);">
+                            <li>(+) Jika satu perangkat rusak, jaringan lain tetap jalan. Mudah dideteksi kesalahannya.</li>
+                            <li>(-) Butuh lebih banyak kabel dan bergantung pada pusat (Switch/Hub).</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="color: var(--primary); margin-bottom: 4px;">3. Topologi Ring (Cincin)</h4>
+                        <p style="margin-bottom: 4px;">Setiap perangkat terhubung ke dua perangkat lain, membentuk lingkaran tertutup. Data mengalir satu arah (unidirectional) atau dua arah untuk mencegah tabrakan.</p>
+                        <ul style="font-size: 13px; color: var(--text-dim);">
+                            <li>(+) Performa stabil pada trafik tinggi.</li>
+                            <li>(-) Jika satu titik putus, jaringan bisa lumpuh (kecuali dual-ring).</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="color: var(--primary); margin-bottom: 4px;">4. Topologi Mesh</h4>
+                        <p style="margin-bottom: 4px;">Setiap perangkat terhubung secara langsung ke perangkat lain (Full Mesh) atau sebagian (Partial Mesh).</p>
+                        <ul style="font-size: 13px; color: var(--text-dim);">
+                            <li>(+) Keamanan data tinggi dan tidak ada gangguan jika satu link mati (Redundancy).</li>
+                            <li>(-) Biaya sangat mahal dan instalasi rumit.</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="color: var(--primary); margin-bottom: 4px;">5. Topologi Tree (Pohon)</h4>
+                        <p style="margin-bottom: 4px;">Gabungan dari beberapa topologi Star yang dihubungkan dengan topologi Bus. Biasa digunakan pada jaringan bertingkat atau gedung bertingkat.</p>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <h4 style="color: var(--primary); margin-bottom: 4px;">6. Topologi Hybrid</h4>
+                        <p style="margin-bottom: 4px;">Kombinasi dari dua atau lebih topologi yang berbeda. Contoh: Jaringan kantor (Star) terhubung ke jaringan pabrik (Bus).</p>
+                    </div>
                 `
             },
             3: {

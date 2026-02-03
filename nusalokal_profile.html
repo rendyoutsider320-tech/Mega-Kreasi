@@ -318,32 +318,7 @@
             }
         }
 
-        /* Navigation */
-        nav {
-            padding: 12px 0;
-            background: rgba(15, 23, 42, 0.95);
-            border-top: 1px solid var(--glass-border);
-            display: flex;
-            justify-content: space-around;
-        }
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 10px;
-        }
-
-        .nav-item.active {
-            color: var(--primary);
-        }
-
-        .nav-item i {
-            font-size: 20px;
-        }
 
         /* Modal Styles */
         .modal-overlay {
@@ -490,6 +465,7 @@
         }
 
         /* Navigation Bar (Fixed for Mobile) */
+        /* Navigation Bar (Fixed for Mobile, matching Beranda) */
         nav {
             position: fixed;
             bottom: 0;
@@ -498,9 +474,9 @@
             width: 100%;
             max-width: 80rem;
             height: calc(4.5rem + env(safe-area-inset-bottom));
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-top: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-around;
@@ -509,14 +485,24 @@
             z-index: 2000;
         }
 
+        /* Desktop Optimization: Center items to avoid wide spread */
+        @media (min-width: 48rem) {
+            nav {
+                justify-content: center;
+                gap: 4rem;
+            }
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             color: var(--text-dim);
             text-decoration: none;
             font-size: 10px;
+            transition: color 0.3s;
+            padding: 4px 0;
         }
 
         .nav-item.active {
@@ -650,7 +636,7 @@
             <a href="nusalokal_mockup.html" class="nav-item"><i class="fas fa-home"></i><span>Beranda</span></a>
             <a href="nusalokal_courses.html" class="nav-item"><i class="fas fa-book-open"></i><span>Kursus</span></a>
             <a href="nusalokal_chat.html" class="nav-item"><i class="fas fa-robot"></i><span>AI Agent</span></a>
-            <a href="#" class="nav-item active"><i class="fas fa-user-circle"></i><span>Profil</span></a>
+            <a href="nusalokal_profile.html" class="nav-item active"><i class="fas fa-user-circle"></i><span>Profil</span></a>
         </nav>
     </div>
 
