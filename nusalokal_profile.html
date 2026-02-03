@@ -475,9 +475,9 @@
             max-width: 80rem;
             height: calc(4.5rem + env(safe-area-inset-bottom));
             background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid var(--glass-border);
+            backdrop-filter: blur(1rem);
+            -webkit-backdrop-filter: blur(1rem);
+            border-top: 0.06rem solid var(--glass-border);
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -485,24 +485,14 @@
             z-index: 2000;
         }
 
-        /* Desktop Optimization: Center items to avoid wide spread */
-        @media (min-width: 48rem) {
-            nav {
-                justify-content: center;
-                gap: 4rem;
-            }
-        }
-
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--text-dim);
             text-decoration: none;
             font-size: 10px;
-            transition: color 0.3s;
-            padding: 4px 0;
         }
 
         .nav-item.active {
@@ -781,8 +771,8 @@
     </script>
 </body>
 
-</html>            }
-        }
+</html>            
+    
     </script>
 </body>
 

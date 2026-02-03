@@ -303,6 +303,13 @@
             padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
         }
 
+        /* Desktop: Add more space between input and nav */
+        @media (min-width: 48rem) {
+            .bottom-section {
+                padding-bottom: calc(6.5rem + env(safe-area-inset-bottom));
+            }
+        }
+
         /* Quick Replies */
         .quick-replies {
             display: flex;
